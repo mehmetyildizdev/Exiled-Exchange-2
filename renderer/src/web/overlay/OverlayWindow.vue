@@ -267,7 +267,7 @@ export default defineComponent({
           : !active.value && w.wmFlags.includes("invisible-on-blur")
             ? false
             : showExclusive
-              ? w === showExclusive
+              ? (w === showExclusive || (w.wmType === "menu" && w.wmWants === "show"))
               : w.wmWants === "show",
       }));
     });

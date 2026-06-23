@@ -17,10 +17,7 @@
         </div>
       </div>
     </div>
-    <div
-      :class="[$style.patronsHorizontal, { invisible: podiumVisible }]"
-      :onMouseenter="showPodium"
-    >
+    <div :class="[$style.patronsHorizontal]">
       <div
         class="bg-gray-800 rounded p-1 justify-center text-center w-44 shrink-0 flex items-center"
       >
@@ -32,11 +29,7 @@
         <span :class="$style.patronsLine">{{ patronsString[1] }}</span>
       </div>
     </div>
-    <div
-      :class="$style.window"
-      class="grow layout-column"
-      :onMouseenter="hidePodium"
-    >
+    <div :class="$style.window" class="grow layout-column">
       <AppTitleBar @close="cancel" :title="t('settings.title')" />
       <div class="flex grow min-h-0">
         <div
@@ -175,7 +168,7 @@ export default defineComponent({
         wmTitle: "{icon=fa-cog}",
         wmWants: "hide",
         wmZorder: "exclusive",
-        wmFlags: ["invisible-on-blur", "ignore-ui-visibility"],
+        wmFlags: ["ignore-ui-visibility"],
       };
     },
   } satisfies WidgetSpec,
@@ -210,10 +203,6 @@ export default defineComponent({
           );
         } else {
           configClone.value = null;
-          if (selectedWmId.value != null) {
-            selectedWmId.value = null;
-            selectedComponent.value = SettingsHotkeys;
-          }
           podiumVisible.value = false;
         }
       },
@@ -372,22 +361,17 @@ function flatJoin<T, J>(arr: T[][], joinEl: () => J) {
 
 <style lang="postcss" module>
 .window {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50rem;
+  height: 38rem;
   max-width: 50rem;
   max-height: 38rem;
   overflow: hidden;
   @apply bg-gray-800;
   @apply rounded-b;
-
-  &:global {
-    animation-name: slideInDown;
-    animation-duration: 1s;
-  }
 }
 
 .menu-item {
@@ -427,11 +411,6 @@ function flatJoin<T, J>(arr: T[][], joinEl: () => J) {
   margin: 0 auto;
   max-width: 50rem;
   display: flex;
-
-  &:global {
-    animation-name: slideInDown;
-    animation-duration: 1s;
-  }
 }
 
 @keyframes slide {
@@ -462,11 +441,6 @@ function flatJoin<T, J>(arr: T[][], joinEl: () => J) {
   width: 100%;
   justify-content: center;
   @apply gap-4 p-4;
-
-  &:global {
-    animation-name: fadeIn;
-    animation-duration: 1.5s;
-  }
 }
 
 .podium > div {
