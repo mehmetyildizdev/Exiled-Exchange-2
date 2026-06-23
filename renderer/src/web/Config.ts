@@ -679,7 +679,6 @@ function upgradeConfig(_config: Config): Config {
   return config as unknown as Config;
 }
 
-
 function getConfigForHost(): HostConfig {
   const actions: ShortcutAction[] = [];
 
