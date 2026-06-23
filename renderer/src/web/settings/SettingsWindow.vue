@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="$style.container">
     <div :class="$style.podium" v-if="podiumVisible">
       <div v-for="i in [2, 4, 5, 3, 1]">
         <div
@@ -15,18 +15,6 @@
               : null
           }}
         </div>
-      </div>
-    </div>
-    <div :class="[$style.patronsHorizontal]">
-      <div
-        class="bg-gray-800 rounded p-1 justify-center text-center w-44 shrink-0 flex items-center"
-      >
-        {{ t("settings.thank_you") }}
-      </div>
-      <div class="overflow-x-hidden whitespace-nowrap p-1 text-base">
-        <span :class="$style.patronsLine">{{ patronsString[0] }}</span
-        ><br />
-        <span :class="$style.patronsLine">{{ patronsString[1] }}</span>
       </div>
     </div>
     <div :class="$style.window" class="grow layout-column">
@@ -56,19 +44,6 @@
           >
             {{ t("app.quit") }}
           </button>
-          <!-- <div
-            class="text-gray-400 text-center mt-auto pr-3 pt-4 pb-12"
-            style="max-width: fit-content; min-width: 100%"
-          >
-            <img class="mx-auto mb-1" src="/images/peepoLove2x.webp" />
-            {{ t("Support development on") }}<br />
-            <a
-              href="https://patreon.com/awakened_poe_trade"
-              class="inline-flex mt-1"
-              target="_blank"
-              ><img class="inline h-5" src="/images/Patreon.svg"
-            /></a>
-          </div> -->
         </div>
         <div class="text-gray-100 grow layout-column bg-gray-900">
           <div class="grow overflow-y-auto bg-gray-800 rounded-tl">
@@ -88,6 +63,17 @@
             <button @click="cancel" class="px-3">{{ t("Cancel") }}</button>
           </div>
         </div>
+      </div>
+    </div>
+    <div :class="[$style.patronsHorizontal]">
+      <div
+        class="bg-gray-800 rounded p-1 justify-center text-center w-44 shrink-0 flex items-center"
+      >
+        {{ t("settings.thank_you") }}
+      </div>
+      <div class="overflow-x-hidden whitespace-nowrap p-1 text-base">
+        <span :class="$style.patronsLine">{{ patronsString[0] }}</span><br />
+        <span :class="$style.patronsLine">{{ patronsString[1] }}</span>
       </div>
     </div>
   </div>
@@ -360,18 +346,28 @@ function flatJoin<T, J>(arr: T[][], joinEl: () => J) {
 </script>
 
 <style lang="postcss" module>
-.window {
+.container {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 50rem;
   height: 38rem;
+  pointer-events: none;
+}
+
+.window {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   max-width: 50rem;
   max-height: 38rem;
   overflow: hidden;
   @apply bg-gray-800;
   @apply rounded-b;
+  pointer-events: auto;
 }
 
 .menu-item {
@@ -408,9 +404,9 @@ function flatJoin<T, J>(arr: T[][], joinEl: () => J) {
   top: 40rem;
   left: 0;
   right: 0;
-  margin: 0 auto;
   max-width: 50rem;
   display: flex;
+  pointer-events: auto;
 }
 
 @keyframes slide {
