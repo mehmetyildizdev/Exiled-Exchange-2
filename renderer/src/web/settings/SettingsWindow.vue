@@ -72,7 +72,8 @@
         {{ t("settings.thank_you") }}
       </div>
       <div class="overflow-x-hidden whitespace-nowrap p-1 text-base">
-        <span :class="$style.patronsLine">{{ patronsString[0] }}</span><br />
+        <span :class="$style.patronsLine">{{ patronsString[0] }}</span
+        ><br />
         <span :class="$style.patronsLine">{{ patronsString[1] }}</span>
       </div>
     </div>

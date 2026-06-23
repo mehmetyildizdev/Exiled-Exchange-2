@@ -1,5 +1,8 @@
 <template>
-  <div @mousedown="handleWidgetMouseDown" @contextmenu.prevent="showContextMenu">
+  <div
+    @mousedown="handleWidgetMouseDown"
+    @contextmenu.prevent="showContextMenu"
+  >
     <div
       :class="[$style.widget, { 'opacity-75': isMoving }]"
       :style="widgetPosition"
@@ -9,7 +12,7 @@
         v-if="showMenu"
         class="absolute px-1"
         :style="actionsPosition"
-        style="background: rgba(0, 0, 0, 0.01); z-index: 9999;"
+        style="background: rgba(0, 0, 0, 0.01); z-index: 9999"
         @mousedown.stop
       >
         <div :class="$style.actionsPanel">
