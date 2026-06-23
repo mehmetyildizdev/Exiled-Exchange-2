@@ -4,6 +4,12 @@ import esbuild from 'esbuild'
 
 const isDev = !process.argv.includes('--prod')
 
+if (isDev && process.platform === 'win32') {
+  try {
+    childProcess.execSync('powershell -Command "Get-CimInstance Win32_Process -Filter \\"Name = \'electron.exe\'\\" | Where-Object { $_.CommandLine -like \'*exiled-exchange*\' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }"', { stdio: 'ignore' })
+  } catch {}
+}
+
 const electronRunner = (() => {
   let handle = null
   return {
