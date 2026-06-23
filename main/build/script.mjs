@@ -1,4 +1,4 @@
-import child_process from 'child_process'
+import childProcess from 'child_process'
 import electron from 'electron'
 import esbuild from 'esbuild'
 
@@ -10,15 +10,23 @@ const electronRunner = (() => {
     restart () {
       console.info('Restarting Electron process.')
 
-      if (handle) handle.kill()
-      handle = child_process.spawn(electron, ['.'], {
+      if (handle) {
+        if (process.platform === 'win32') {
+          try {
+            childProcess.execSync(`taskkill /pid ${handle.pid} /t /f`, { stdio: 'ignore' })
+          } catch {}
+        } else {
+          handle.kill()
+        }
+      }
+      handle = childProcess.spawn(electron, ['.'], {
         stdio: 'inherit'
       })
     }
   }
 })()
 
-const visionBuild = await esbuild.build({
+await esbuild.build({
   entryPoints: ['src/vision/link-worker.ts'],
   bundle: true,
   platform: 'node',

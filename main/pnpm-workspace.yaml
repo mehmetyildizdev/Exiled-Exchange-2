@@ -1,0 +1,6 @@
+allowBuilds:
+  electron: true
+  electron-overlay-window: true
+  electron-winstaller: true
+  esbuild: true
+  uiohook-napi: true

@@ -1,0 +1,14 @@
+{
+  "name": "exiled-exchange-2-workspace",
+  "private": true,
+  "devDependencies": {
+    "concurrently": "^10.0.0"
+  },
+  "scripts": {
+    "predev": "pnpm install",
+    "dev": "pnpm exec concurrently \"pnpm --dir renderer run dev\" \"pnpm --dir main run dev\"",
+    "setup": "pnpm install",
+    "update": "git fetch origin && git merge origin/master",
+    "sync-upstream": "git remote get-url upstream 2>nul || git remote add upstream https://github.com/Kvan7/Exiled-Exchange-2.git && git fetch upstream && git checkout master && git merge upstream/master && git push origin master"
+  }
+}

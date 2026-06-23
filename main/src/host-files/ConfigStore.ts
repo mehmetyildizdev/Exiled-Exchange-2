@@ -30,8 +30,7 @@ export class ConfigStore {
   }
 
   private async save(contents: string, tmp: boolean) {
-    if (process.env.VITE_DEV_SERVER_URL) return;
-
+    // Always save config, including in dev mode, so settings persist across reloads
     if (tmp && !this.isTmpFile) {
       this.cfgPath += ".tmp";
       this.isTmpFile = true;
