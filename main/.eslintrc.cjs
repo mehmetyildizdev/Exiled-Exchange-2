@@ -45,7 +45,7 @@ module.exports = {
     {
       files: ["*.ts"],
       parserOptions: {
-        project: require("path").resolve(__dirname, "./tsconfig.json"),
+        project: "./tsconfig.json",
       },
     },
   ],

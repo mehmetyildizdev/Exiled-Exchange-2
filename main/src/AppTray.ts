@@ -47,10 +47,7 @@ export class AppTray {
       {
         label: "Open in Browser",
         click: () => {
-          const url =
-            process.env.VITE_DEV_SERVER_URL ||
-            `http://localhost:${this.serverPort}`;
-          shell.openExternal(url);
+          shell.openExternal(`http://localhost:${this.serverPort}`);
         },
       },
       { type: "separator" },
